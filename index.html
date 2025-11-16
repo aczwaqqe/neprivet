@@ -12,34 +12,13 @@
         }
 
         body {
-            background: linear-gradient(to top, #000000, #0a0a0a, #1a1a1a, #000000);
-            background-size: 100% 400%;
-            animation: gradientFlow 20s ease infinite;
+            background-color: #000;
             color: #fff;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 0% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        /* Частицы */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
 
         .header {
@@ -56,8 +35,8 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             opacity: 0;
-            animation: fadeInUp 0.9s ease forwards;
-            animation-delay: calc(0.8s + (0.6s * random()));
+            animation: fadeIn 0.9s ease forwards;
+            animation-delay: calc(0.8s + (0.6s * var(--random)));
         }
 
         .subtitle {
@@ -65,37 +44,31 @@
             color: #ccc;
             margin-bottom: 40px;
             opacity: 0;
-            animation: fadeInUp 0.9s ease forwards;
-            animation-delay: calc(1s + (0.4s * random()));
+            animation: fadeIn 0.9s ease forwards;
+            animation-delay: calc(1s + (0.4s * var(--random)));
         }
 
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             to {
                 opacity: 1;
-                transform: translateY(0);
             }
         }
 
         .section {
             margin-bottom: 80px;
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.9s ease forwards;
+            animation: fadeIn 0.9s ease forwards;
         }
 
-        /* Случайные задержки для секций */
-        .section:nth-child(1) { animation-delay: calc(0.8s + (0.6s * random())); }
-        .section:nth-child(2) { animation-delay: calc(1s + (0.4s * random())); }
-        .section:nth-child(3) { animation-delay: calc(1.2s + (0.2s * random())); }
-        .section:nth-child(4) { animation-delay: calc(1.4s + (0.3s * random())); }
-        .section:nth-child(5) { animation-delay: calc(1.6s + (0.5s * random())); }
+        .section:nth-child(1) { animation-delay: calc(0.8s + (0.6s * var(--random))); }
+        .section:nth-child(2) { animation-delay: calc(1s + (0.4s * var(--random))); }
+        .section:nth-child(3) { animation-delay: calc(1.2s + (0.2s * var(--random))); }
+        .section:nth-child(4) { animation-delay: calc(1.4s + (0.3s * var(--random))); }
+        .section:nth-child(5) { animation-delay: calc(1.6s + (0.5s * var(--random))); }
 
         .image-container {
             text-align: center;
             margin: 30px 0;
-            position: relative;
-            display: inline-block;
-            width: 100%;
         }
 
         .content-image {
@@ -106,32 +79,15 @@
             cursor: pointer;
             max-height: 400px;
             object-fit: cover;
-            position: relative;
-            z-index: 1;
         }
 
-        .image-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .image-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            border-radius: 8px;
-        }
-
-        .image-wrapper:hover .content-image {
+        .content-image:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 0 2px #fff;
         }
 
         .text-content {
-            background: rgba(17, 17, 17, 0.8);
+            background: #111;
             padding: 25px;
             border-radius: 8px;
             border-left: 4px solid #fff;
@@ -139,8 +95,8 @@
             font-size: 1.1rem;
             color: #e0e0e0;
             opacity: 0;
-            animation: fadeInUp 0.9s ease forwards;
-            animation-delay: calc(1s + (0.4s * random()));
+            animation: fadeIn 0.9s ease forwards;
+            animation-delay: calc(1s + (0.4s * var(--random)));
         }
 
         .how-to-title {
@@ -151,8 +107,8 @@
             border-bottom: 2px solid #333;
             padding-bottom: 15px;
             opacity: 0;
-            animation: fadeInUp 0.9s ease forwards;
-            animation-delay: calc(1.2s + (0.2s * random()));
+            animation: fadeIn 0.9s ease forwards;
+            animation-delay: calc(1.2s + (0.2s * var(--random)));
         }
 
         .footer {
@@ -161,8 +117,8 @@
             padding: 30px;
             border-top: 1px solid #333;
             opacity: 0;
-            animation: fadeInUp 0.9s ease forwards;
-            animation-delay: calc(1.4s + (0.3s * random()));
+            animation: fadeIn 0.9s ease forwards;
+            animation-delay: calc(1.4s + (0.3s * var(--random)));
         }
 
         .telegram-link {
@@ -233,9 +189,6 @@
     </style>
 </head>
 <body>
-    <!-- Canvas для частиц -->
-    <canvas id="particles"></canvas>
-
     <!-- Кнопка GitHub в правом верхнем углу -->
     <a href="https://github.com/aczwaqqe/neprivet" class="github-corner" aria-label="View source on GitHub">
         <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
@@ -252,10 +205,7 @@
 
     <div class="section">
         <div class="image-container">
-            <div class="image-wrapper">
-                <img src="src/1.png" alt="Пример 1" class="content-image">
-                <canvas class="image-canvas" id="canvas1"></canvas>
-            </div>
+            <img src="src/1.jpg" alt="Пример 1" class="content-image">
         </div>
         <div class="text-content">
             Вместо того чтобы сразу перейти к делу, вы ждете когда ваш собеседник ответит на ваше приветствие, а потом ждать, пока сформулируете вопрос.
@@ -264,10 +214,7 @@
 
     <div class="section">
         <div class="image-container">
-            <div class="image-wrapper">
-                <img src="src/2.png" alt="Пример 2" class="content-image">
-                <canvas class="image-canvas" id="canvas2"></canvas>
-            </div>
+            <img src="src/2.jpg" alt="Пример 2" class="content-image">
         </div>
         <div class="text-content">
             А затем, вы вынуждены ждать ответа на важный вопрос, когда могли уместить все в одном.
@@ -276,10 +223,7 @@
 
     <div class="section">
         <div class="image-container">
-            <div class="image-wrapper">
-                <img src="src/4.png" alt="Пример 4" class="content-image">
-                <canvas class="image-canvas" id="canvas4"></canvas>
-            </div>
+            <img src="src/4.jpg" alt="Пример 4" class="content-image">
         </div>
         <div class="text-content">
             Не пишите "лесенкой". Это засоряет личку, умещайте все в одном сообщении.
@@ -290,10 +234,7 @@
 
     <div class="section">
         <div class="image-container">
-            <div class="image-wrapper">
-                <img src="src/3.png" alt="Пример 3" class="content-image">
-                <canvas class="image-canvas" id="canvas3"></canvas>
-            </div>
+            <img src="src/3.jpg" alt="Пример 3" class="content-image">
         </div>
         <div class="text-content">
             Вы получаете ответ раньше, и не заставляете никого ждать. Собеседник сразу может начать думать над вашим вопросом.
@@ -305,180 +246,14 @@
     </div>
 
     <script>
-        // Функция для генерации случайных чисел в диапазоне
-        function random() {
-            return Math.random();
-        }
-
-        // Система частиц
-        class Particles {
-            constructor() {
-                this.canvas = document.getElementById('particles');
-                this.ctx = this.canvas.getContext('2d');
-                this.particles = [];
-                this.maxParticles = 50;
-                
-                this.resize();
-                this.init();
-                this.animate();
-                
-                window.addEventListener('resize', () => this.resize());
-            }
+        // Устанавливаем случайные задержки для всех анимированных элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.main-title, .subtitle, .section, .text-content, .how-to-title, .footer');
             
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-            
-            init() {
-                for (let i = 0; i < this.maxParticles; i++) {
-                    this.particles.push({
-                        x: Math.random() * this.canvas.width,
-                        y: Math.random() * this.canvas.height,
-                        size: Math.random() * 2 + 0.5,
-                        speedX: (Math.random() - 0.5) * 0.5,
-                        speedY: (Math.random() - 0.5) * 0.5,
-                        opacity: Math.random() * 0.5 + 0.1
-                    });
-                }
-            }
-            
-            animate() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                this.particles.forEach(particle => {
-                    particle.x += particle.speedX;
-                    particle.y += particle.speedY;
-                    
-                    if (particle.x < 0 || particle.x > this.canvas.width) particle.speedX *= -1;
-                    if (particle.y < 0 || particle.y > this.canvas.height) particle.speedY *= -1;
-                    
-                    this.ctx.beginPath();
-                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-                    this.ctx.fill();
-                });
-                
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-
-        // Система рамок для изображений
-        class ImageBorder {
-            constructor(canvasId, imageElement) {
-                this.canvas = document.getElementById(canvasId);
-                this.ctx = this.canvas.getContext('2d');
-                this.image = imageElement;
-                this.isHovered = false;
-                this.animationProgress = 0;
-                
-                this.resize();
-                this.attachEvents();
-                this.animate();
-                
-                window.addEventListener('resize', () => this.resize());
-            }
-            
-            resize() {
-                const rect = this.image.getBoundingClientRect();
-                this.canvas.width = rect.width;
-                this.canvas.height = rect.height;
-                this.canvas.style.width = rect.width + 'px';
-                this.canvas.style.height = rect.height + 'px';
-            }
-            
-            attachEvents() {
-                this.image.addEventListener('mouseenter', () => {
-                    this.isHovered = true;
-                });
-                
-                this.image.addEventListener('mouseleave', () => {
-                    this.isHovered = false;
-                });
-            }
-            
-            animate() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                if (this.isHovered) {
-                    this.animationProgress = Math.min(this.animationProgress + 0.1, 1);
-                } else {
-                    this.animationProgress = Math.max(this.animationProgress - 0.1, 0);
-                }
-                
-                if (this.animationProgress > 0) {
-                    this.ctx.strokeStyle = '#ffffff';
-                    this.ctx.lineWidth = 2;
-                    this.ctx.lineJoin = 'round';
-                    
-                    const progress = this.animationProgress;
-                    const width = this.canvas.width;
-                    const height = this.canvas.height;
-                    
-                    this.ctx.beginPath();
-                    
-                    // Анимированное рисование рамки
-                    const totalLength = (width + height) * 2;
-                    const currentLength = totalLength * progress;
-                    
-                    if (currentLength <= width) {
-                        // Верхняя граница
-                        this.ctx.moveTo(0, 0);
-                        this.ctx.lineTo(currentLength, 0);
-                    } else if (currentLength <= width + height) {
-                        // Верхняя + правая граница
-                        this.ctx.moveTo(0, 0);
-                        this.ctx.lineTo(width, 0);
-                        this.ctx.lineTo(width, currentLength - width);
-                    } else if (currentLength <= width * 2 + height) {
-                        // Верхняя + правая + нижняя граница
-                        this.ctx.moveTo(0, 0);
-                        this.ctx.lineTo(width, 0);
-                        this.ctx.lineTo(width, height);
-                        this.ctx.lineTo(width - (currentLength - width - height), height);
-                    } else {
-                        // Все границы
-                        this.ctx.moveTo(0, 0);
-                        this.ctx.lineTo(width, 0);
-                        this.ctx.lineTo(width, height);
-                        this.ctx.lineTo(0, height);
-                        this.ctx.lineTo(0, height - (currentLength - width * 2 - height));
-                    }
-                    
-                    this.ctx.stroke();
-                }
-                
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            // Запуск системы частиц
-            new Particles();
-            
-            // Инициализация рамок для всех изображений
-            const images = [
-                { canvasId: 'canvas1', imageId: 'image1' },
-                { canvasId: 'canvas2', imageId: 'image2' },
-                { canvasId: 'canvas3', imageId: 'image3' },
-                { canvasId: 'canvas4', imageId: 'image4' }
-            ];
-            
-            // Находим изображения по классу
-            const imageElements = document.querySelectorAll('.content-image');
-            imageElements.forEach((img, index) => {
-                const canvasId = `canvas${index + 1}`;
-                if (index === 2) canvasId = 'canvas4'; // Поправка для порядка изображений
-                if (index === 3) canvasId = 'canvas3';
-                
-                new ImageBorder(canvasId, img);
-            });
-            
-            // Установка случайных задержек для анимации
-            document.querySelectorAll('.section, .text-content, .main-title, .subtitle, .how-to-title, .footer').forEach(el => {
-                const delay = 0.8 + (random() * 0.6); // от 0.8 до 1.4 секунд
-                el.style.animationDelay = delay + 's';
+            animatedElements.forEach(element => {
+                const randomDelay = 0.8 + Math.random() * 0.6; // от 0.8 до 1.4 секунд
+                element.style.setProperty('--random', Math.random());
+                element.style.animationDelay = randomDelay + 's';
             });
         });
 
