@@ -1,1 +1,1 @@
-# aczwaqqe.github.io/neprivet
+# https://aczwaqqe.github.io/neprivet
